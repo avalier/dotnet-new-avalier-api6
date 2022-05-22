@@ -1,33 +1,62 @@
+using Serilog;
+using Serilog.Enrichers.Span;
+using Serilog.Events;
+using Serilog.Formatting.Compact;
+
 namespace Avalier.Demo;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-    var builder = WebApplication.CreateBuilder(args);
+        Serilog.Log.Logger = new LoggerConfiguration()
+            .WithConfiguration()
+            .CreateBootstrapLogger();
 
-    // Add services to the container.
+        Log.Information("Starting host");
 
-    builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+        try
+        {
 
-    var app = builder.Build();
+            var builder = WebApplication.CreateBuilder(args);
 
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+            builder.Host.UseSerilog((ctx, lc) => lc
+                .WithConfiguration()
+                .ReadFrom.Configuration(ctx.Configuration));
 
-    app.UseHttpsRedirection();
+            builder.Services.AddControllers();
 
-    app.UseAuthorization();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-    app.MapControllers();
+            var app = builder.Build();
 
-    app.Run();
+            app.UseSerilogRequestLogging();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+            app.MapControllers();
+
+            app.Run();
+        }
+        catch (Exception x)
+        {
+            Log.Fatal(x, "Host terminated (due to exception)");
+        }
+        finally
+        {
+            Log.Information("Stopped host");
+            Log.CloseAndFlush();
+        }
     }
 }
