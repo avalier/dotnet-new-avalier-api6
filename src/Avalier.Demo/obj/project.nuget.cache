@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "QOVtKrjw8yeRIcbgdjRiyFoUX3Zhnlb9lturWLSIHVvd2/BR0yeXAr2sEdO0rQa7WLUtwR5rLt+D1PvoMjZBFA==",
+  "success": true,
+  "projectFilePath": "/mnt/wsl/PhysicalDrive1/Projects/avalier/dotnet-new-avalier-api6-src/src/Avalier.Demo/Avalier.Demo.csproj",
+  "expectedPackageFiles": [
+    "/home/nick/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/home/nick/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/nick/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "/home/nick/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "/home/nick/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/home/nick/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
